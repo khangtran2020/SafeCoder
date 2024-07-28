@@ -8,6 +8,10 @@ from safecoder.trainer import Trainer
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_name", type=str, required=True)
+    parser.add_argument(
+        "--output_path", type=str, required=False, default="../trained/"
+    )
+
     parser.add_argument("--datasets", type=str, nargs="+", required=True)
 
     parser.add_argument("--pretrain_name", type=str, default="codegen-350m")
@@ -124,14 +128,14 @@ def get_args():
     if args.exclude_neg:
         args.sampling_size = args.sampling_size // 2
 
-    args.output_dir = os.path.join(args.model_dir, args.output_name)
+    args.output_dir = os.path.join(args.output_path, args.output_name)
 
     return args
 
 
 def main():
     args = get_args()
-    set_logging(args, os.path.join(args.output_dir, "train.log"))
+    set_logging(args, os.path.join(args.output_path, "train.log"))
     set_seed(args.seed)
     Trainer(args).run()
 
