@@ -14,7 +14,7 @@ from tabulate import tabulate
 from termcolor import colored
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, Qwen2ForCausalLM
 from peft import PeftModel
 
 from .constants import PRETRAINED_MODELS, CHAT_MODELS
@@ -185,7 +185,7 @@ def load_model(model_name, args):
                 model_dir, device_map="auto", trust_remote_code=True
             )
         else:
-            model = AutoModelForCausalLM.from_pretrained(
+            model = Qwen2ForCausalLM.from_pretrained(
                 model_dir,
                 device_map="auto",
                 trust_remote_code=True,
