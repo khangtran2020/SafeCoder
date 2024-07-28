@@ -185,13 +185,7 @@ def load_model(model_name, args):
                 model_dir, device_map="auto", trust_remote_code=True
             )
         else:
-            print(model_dir)
-            model = Qwen2ForCausalLM.from_pretrained(
-                model_dir,
-                device_map="auto",
-                trust_remote_code=True,
-                **{"vocab_size": len(tokenizer)},
-            )
+            model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto")
         model.resize_token_embeddings(len(tokenizer))
     return tokenizer, model
 
