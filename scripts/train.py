@@ -13,6 +13,7 @@ def get_args():
     )
 
     parser.add_argument("--datasets", type=str, nargs="+", required=True)
+    parser.add_argument("--num_sample", type=int, default=-1)
 
     parser.add_argument("--pretrain_name", type=str, default="codegen-350m")
 

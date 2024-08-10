@@ -232,8 +232,14 @@ class Trainer:
             self.ref_model.eval()
 
     def load_dataset(self):
-        self.dataset = CodeDataset(self.args, self.tokenizer, "train")
-        self.val_dataset = CodeDataset(self.args, self.tokenizer, "val")
+        if self.args.num_sample > 0:
+            num_sample = self.args.num_sample
+        else:
+            num_sample = -1
+        self.dataset = CodeDataset(
+            self.args, self.tokenizer, "train", num_sample=num_sample
+        )
+        self.val_dataset = CodeDataset(self.args, self.tokenizer, "val", num_sample=-1)
 
     def save(self, path):
         """
